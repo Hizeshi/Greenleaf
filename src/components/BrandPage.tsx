@@ -23,6 +23,18 @@ export type BrandPageData = {
   waMessage: string;
   categories: { icon: LucideIcon; title: string; text: string }[];
   bestsellers: { name: string; note: string; tag: string }[];
+  /** Блок «О производителе» — сдержанный рассказ о компании */
+  aboutBrand: {
+    heading: string;
+    paragraphs: string[];
+    facts: string[];
+  };
+  /** Тёмный блок с клубной ценой */
+  club: {
+    badge: string;
+    heading: string;
+    text: string;
+  };
   perks: string[];
   /** Сдержанное упоминание производителя внизу страницы */
   brandNote: string;
@@ -165,8 +177,43 @@ export function BrandPage({ data }: { data: BrandPageData }) {
         </div>
       </section>
 
+      {/* О производителе */}
+      <section className="bg-paper px-5 py-16 md:py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-start">
+            <Reveal>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">
+                О производителе
+              </p>
+              <h2 className="mt-3 font-display text-3xl leading-tight text-forest md:text-4xl">
+                {data.aboutBrand.heading}
+              </h2>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {data.aboutBrand.facts.map((fact) => (
+                  <span
+                    key={fact}
+                    className="rounded-full border border-gold/40 bg-gold-soft/40 px-4 py-1.5 text-sm font-medium text-forest"
+                  >
+                    {fact}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <div className="space-y-4">
+                {data.aboutBrand.paragraphs.map((text) => (
+                  <p key={text} className="leading-relaxed text-ink-soft">
+                    {text}
+                  </p>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       {/* Клубная цена */}
-      <section className="px-5 pb-8">
+      <section className="px-5 py-16 md:py-20">
         <Reveal className="relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] bg-forest px-6 py-14 md:px-14 md:py-16">
           <div
             aria-hidden
@@ -176,16 +223,12 @@ export function BrandPage({ data }: { data: BrandPageData }) {
             <div>
               <p className="inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-1.5 text-sm font-medium text-gold">
                 <BadgePercent className="size-4" />
-                Клубная цена
+                {data.club.badge}
               </p>
               <h2 className="mt-5 font-display text-3xl leading-tight text-cream md:text-4xl">
-                Зарегистрируйтесь по ссылке — и весь каталог станет дешевле
+                {data.club.heading}
               </h2>
-              <p className="mt-4 leading-relaxed text-cream/70">
-                Одна минута на регистрацию, никаких обязательств и платежей.
-                Просто с этого момента вы покупаете напрямую у производителя по
-                внутренней цене.
-              </p>
+              <p className="mt-4 leading-relaxed text-cream/70">{data.club.text}</p>
               <a
                 href={data.goHref}
                 target="_blank"

@@ -69,6 +69,16 @@ export function SiteFooter() {
                   Telegram
                 </a>
               </li>
+              <li>
+                <a
+                  href={site.contacts.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cream/70 transition-colors hover:text-gold"
+                >
+                  TikTok
+                </a>
+              </li>
             </ul>
             <p className="mt-4 text-cream/50">Отвечаю обычно в течение часа.</p>
           </div>

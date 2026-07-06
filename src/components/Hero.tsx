@@ -85,7 +85,7 @@ export function Hero() {
             </span>
             <span className="inline-flex items-center gap-2">
               <Sparkles className="size-4 text-gold" />
-              Скидка клуба до 25%
+              Клубные скидки до 50%
             </span>
           </motion.div>
         </motion.div>
