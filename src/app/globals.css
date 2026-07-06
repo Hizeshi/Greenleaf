@@ -1,26 +1,113 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Палитра: тёплая бумага + глубокий лес + золото */
+  --color-cream: #f6f2e9;
+  --color-paper: #fcfaf4;
+  --color-ink: #22312a;
+  --color-ink-soft: #58685f;
+  --color-forest: #16382b;
+  --color-forest-deep: #0c241a;
+  --color-sage: #9db8a5;
+  --color-sage-soft: #dfe8de;
+  --color-gold: #c2a05c;
+  --color-gold-soft: #ead9b6;
+  --color-line: #e6dfcd;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --animate-marquee: marquee 36s linear infinite;
+  --animate-blob: blob 18s ease-in-out infinite;
+  --animate-blob-slow: blob 26s ease-in-out infinite reverse;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-late: float 9s ease-in-out 1.2s infinite;
+  --animate-spin-slow: spin 22s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes blob {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(4%, -6%) scale(1.08);
+    }
+    66% {
+      transform: translate(-5%, 4%) scale(0.94);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    80%,
+    100% {
+      transform: scale(1.9);
+      opacity: 0;
+    }
   }
 }
 
+@theme inline {
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-forest-deep);
+}
+
+/* Зернистость поверх всего сайта — едва заметная плёнка */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Тонкий скроллбар в тон */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-sage);
+  border-radius: 999px;
+  border: 2px solid var(--color-cream);
 }
