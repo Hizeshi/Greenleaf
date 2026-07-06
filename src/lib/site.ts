@@ -28,11 +28,16 @@ export const site = {
   /**
    * Реферальные ссылки. Кнопки «Открыть каталог» ведут сюда.
    * Также работают короткие адреса /go/siberian и /go/greenleaf.
+   * У Greenleaf реферальных ссылок нет — /go/greenleaf ведёт в личный
+   * чат WhatsApp (регистрация со скидкой 50% оформляется вручную).
    */
   referral: {
-    siberian: "https://ru.siberianhealth.com/", // TODO: вставить свою реферальную ссылку
-    greenleaf: "https://global.green-leaf.shop/", // TODO: вставить свою реферальную ссылку
+    siberian:
+      "https://kz.siberianwellness.com/kz-ru/registration/privileged_client?referral=2550313021",
   },
+  /** Сообщение для заявок по Greenleaf (короткая ссылка /go/greenleaf) */
+  greenleafPreset:
+    "Здравствуйте! Хочу заказать продукцию Greenleaf со скидкой 50%.",
 } as const;
 
 export function waLink(text?: string): string {

@@ -1,6 +1,7 @@
 import { MessageCircle, Send } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
-import { tgLink, waLink } from "@/lib/site";
+import { TikTokIcon } from "@/components/TikTokIcon";
+import { site, tgLink, waLink } from "@/lib/site";
 
 /** Финальный тёмный блок с призывом написать в мессенджер */
 export function CtaSection({
@@ -46,6 +47,15 @@ export function CtaSection({
             >
               <Send className="size-5" />
               Написать в Telegram
+            </a>
+            <a
+              href={site.contacts.tiktok}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#010101] px-7 py-3.5 font-semibold text-white ring-1 ring-[#25f4ee]/40 transition-transform duration-300 hover:scale-105"
+            >
+              <TikTokIcon className="size-5" />
+              Мой TikTok
             </a>
           </div>
           <p className="mt-6 text-sm text-cream/50">

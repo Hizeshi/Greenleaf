@@ -18,9 +18,14 @@ export type BrandPageData = {
   titleAccent: string;
   intro: string;
   heroTags: string[];
-  /** Короткий адрес /go/..., ведущий на реферальную ссылку */
+  /** Короткий адрес /go/..., ведущий на реферальную ссылку или в чат */
   goHref: string;
   waMessage: string;
+  /** Подписи кнопок (по умолчанию — «каталожные») */
+  ctaLabel?: string;
+  bestsellerCta?: string;
+  bestsellersNote?: string;
+  clubCta?: string;
   categories: { icon: LucideIcon; title: string; text: string }[];
   bestsellers: { name: string; note: string; tag: string }[];
   /** Блок «О производителе» — сдержанный рассказ о компании */
@@ -41,6 +46,12 @@ export type BrandPageData = {
 };
 
 export function BrandPage({ data }: { data: BrandPageData }) {
+  const ctaLabel = data.ctaLabel ?? "Открыть каталог со скидкой";
+  const bestsellerCta = data.bestsellerCta ?? "Смотреть в каталоге";
+  const bestsellersNote =
+    data.bestsellersNote ??
+    "Актуальные цены — в каталоге: по ссылке они откроются сразу клубными.";
+  const clubCta = data.clubCta ?? "Перейти в каталог";
   return (
     <>
       {/* Хиро направления */}
@@ -96,7 +107,7 @@ export function BrandPage({ data }: { data: BrandPageData }) {
                 className="group inline-flex items-center gap-2 rounded-full bg-forest px-7 py-3.5 font-semibold text-cream transition-all duration-300 hover:bg-forest-deep hover:shadow-xl hover:shadow-forest/25"
               >
                 <ShoppingBag className="size-5" />
-                Открыть каталог со скидкой
+                {ctaLabel}
                 <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <a
@@ -144,9 +155,7 @@ export function BrandPage({ data }: { data: BrandPageData }) {
             <h2 className="font-display text-3xl text-forest md:text-4xl">
               С чего чаще всего начинают
             </h2>
-            <p className="max-w-sm text-sm text-ink-soft">
-              Актуальные цены — в каталоге: по ссылке они откроются сразу клубными.
-            </p>
+            <p className="max-w-sm text-sm text-ink-soft">{bestsellersNote}</p>
           </Reveal>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {data.bestsellers.map((item, i) => (
@@ -167,7 +176,7 @@ export function BrandPage({ data }: { data: BrandPageData }) {
                     {item.note}
                   </p>
                   <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-gold">
-                    Смотреть в каталоге
+                    {bestsellerCta}
                     <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>
                 </a>
@@ -236,7 +245,7 @@ export function BrandPage({ data }: { data: BrandPageData }) {
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 font-semibold text-forest-deep transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-gold/25"
               >
                 <ShoppingBag className="size-5" />
-                Перейти в каталог
+                {clubCta}
               </a>
             </div>
             <ul className="space-y-4">

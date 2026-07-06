@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { MessageCircle, Send, X } from "lucide-react";
-import { tgLink, waLink } from "@/lib/site";
+import { TikTokIcon } from "@/components/TikTokIcon";
+import { site, tgLink, waLink } from "@/lib/site";
 
 /** Плавающая кнопка связи: раскрывается в WhatsApp и Telegram */
 export function FloatingContact() {
@@ -37,6 +38,15 @@ export function FloatingContact() {
             >
               <Send className="size-5" />
               Telegram
+            </a>
+            <a
+              href={site.contacts.tiktok}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 rounded-full bg-[#010101] py-2.5 pl-4 pr-5 text-sm font-semibold text-white shadow-lg shadow-[#25f4ee]/20 ring-1 ring-[#25f4ee]/40 transition-transform hover:scale-105"
+            >
+              <TikTokIcon className="size-5" />
+              TikTok
             </a>
           </motion.div>
         )}
